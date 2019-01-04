@@ -12,13 +12,28 @@ public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    public Project saveOrUpdateProject(Project project){
+    public Project saveOrUpdateProject(Project project) {
 
         try {
-            project.setProjectIdentifer(project.getProjectIdentifer().toUpperCase());
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
             return projectRepository.save(project);
         } catch (Exception e) {
-           throw new ProjectIdException("Project ID '" + project.getProjectIdentifer()+"' already exists");
+            throw new ProjectIdException("Project ID '" + project.getProjectIdentifier() + "' already exists");
         }
     }
+
+    public Project findProjectByIdentifier(String projectID) {
+        Project project = projectRepository.findByProjectIdentifier(projectID.toUpperCase());
+
+        if (project == null) {
+            throw new ProjectIdException("Project ID '" +projectID+ "' does not exist");
+        }
+
+        return project;
+    }
+
+    public Iterable<Project> findAllProjects(){
+        return projectRepository.findAll();
+    }
+
 }
