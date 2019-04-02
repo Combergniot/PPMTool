@@ -1,4 +1,4 @@
-package com.combergniot.ppmtool.web;
+package com.combergniot.ppmtool.controllers;
 
 import com.combergniot.ppmtool.domain.ProjectTask;
 import com.combergniot.ppmtool.services.MapValidationErrorService;
@@ -25,8 +25,8 @@ public class BacklogController {
     @PostMapping("/{backlog_id}")
     public ResponseEntity<?> addPTtoBacklog(@Valid @RequestBody ProjectTask projectTask,
                                             BindingResult bindingResult, @PathVariable String backlog_id) {
-        ResponseEntity<?> erroMap = mapValidationErrorService.MapValidationService(bindingResult);
-        if (erroMap != null) return erroMap;
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(bindingResult);
+        if (errorMap != null) return errorMap;
         ProjectTask projectTask1 = projectTaskService.addProjectTask(backlog_id, projectTask);
         return new ResponseEntity<ProjectTask>(projectTask1, HttpStatus.CREATED);
     }

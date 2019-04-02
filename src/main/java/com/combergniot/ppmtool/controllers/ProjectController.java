@@ -1,4 +1,4 @@
-package com.combergniot.ppmtool.web;
+package com.combergniot.ppmtool.controllers;
 
 import com.combergniot.ppmtool.domain.Project;
 import com.combergniot.ppmtool.services.MapValidationErrorService;
